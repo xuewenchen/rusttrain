@@ -15,8 +15,16 @@ fn main() {
     fn_ownership(String::from("hello"));
     
     // return ownership
-    let s = get_ownership();
+    let mut s = get_ownership();
     println!("get str = {}", s);
+
+    // use reference in function
+    let str_len = get_str_len(&s);
+    println!("the str len is = {}", str_len);
+
+    // mut reference
+    mut_str(&mut s);
+    println!("after mut the str is = {}", s);
 
 }
 
@@ -28,4 +36,12 @@ fn fn_ownership(s: String) {
 // return ownership
 fn get_ownership() -> String {
     String::from("get ownership")
+}
+
+fn get_str_len(s: &String) -> usize {
+    s.len()
+}
+
+fn mut_str(s: &mut String) {
+    s.push_str(", nothing");
 }
