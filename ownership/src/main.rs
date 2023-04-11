@@ -26,6 +26,9 @@ fn main() {
     mut_str(&mut s);
     println!("after mut the str is = {}", s);
 
+    // test str slice
+    test_str_slice();
+
 }
 
 // get ownership
@@ -44,4 +47,32 @@ fn get_str_len(s: &String) -> usize {
 
 fn mut_str(s: &mut String) {
     s.push_str(", nothing");
+}
+
+fn test_str_slice() {
+    let s = "mystr is ok";
+    println!("{s}");
+
+    let s1 = &s[1..2];
+    println!("{s1}");
+
+    let mut s = String::from("hello world");
+
+    let word = first_word(&s);
+
+    // s.clear(); // error!
+
+    println!("the first word is: {}", word);
+}
+
+fn first_word(s: &String) -> &str {
+    let bytes = s.as_bytes();
+
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[0..i];
+        }
+    }
+
+    &s[..]
 }
