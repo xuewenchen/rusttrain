@@ -25,5 +25,11 @@ fn main() {
         None => &0,
     };
     println!("a = {a}");
+
+    if let Some(yy) = item {
+        println!("there is something in item = {yy}");
+    } else {
+        println!("there is noting in item");
+    }
     
 }
