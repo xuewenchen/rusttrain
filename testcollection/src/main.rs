@@ -14,8 +14,12 @@ fn main() {
 
     // new vec use vec!
     let mut b = vec![1, 2, 3];
-    for ele in &b {
-        println!("ele = {ele}");
+    for ele in &mut b {
+        *ele = 10;
+        println!("ele1 = {ele}");
+    }
+    for ele in &mut b {
+        println!("ele2 = {ele}");
     }
 
     // get data from vec
