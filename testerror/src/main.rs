@@ -1,8 +1,10 @@
 use std::fs::File;
 use std::io::ErrorKind;
 use std::io::{self, Read};
+use std::fs;
+use std::error::Error;
 
-fn main() {
+fn main() -> Result<(), Box<dyn Error>>{
     // let greeting_file_result = File::open("hello.txt");
 
     // let greeting_file = match greeting_file_result {
@@ -18,8 +20,10 @@ fn main() {
     //     },
     // };
     // get_upwrap();
-    get_upwrap_expetct();
+    // get_upwrap_expetct();
 
+    
+    Ok(())
 }
 
 fn get_upwrap() {
@@ -49,4 +53,14 @@ fn get_error_from_fn_simple() -> Result<String, std::io::Error> {
     let mut username = String::new();
     file_handler.read_to_string(&mut username)?;
     Ok(username)
+}
+
+fn get_error_from_fn_simple2() -> Result<String, std::io::Error> {
+    let mut username = String::new();
+    File::open("hello.txt")?.read_to_string(&mut username)?;
+    Ok(username)
+}
+
+fn get_error_from_fn_simple3() -> Result<String, std::io::Error> {
+    fs::read_to_string("hello.txt")
 }
