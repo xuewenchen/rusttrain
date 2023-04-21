@@ -1,5 +1,6 @@
 use std::fs::File;
 use std::io::ErrorKind;
+use std::io::{self, Read};
 
 fn main() {
     // let greeting_file_result = File::open("hello.txt");
@@ -19,8 +20,6 @@ fn main() {
     // get_upwrap();
     get_upwrap_expetct();
 
-
-
 }
 
 fn get_upwrap() {
@@ -29,4 +28,25 @@ fn get_upwrap() {
 
 fn get_upwrap_expetct() {
     let file_result = File::open("world.txt").expect("there is some bad things");
+}
+
+fn get_error_from_fn() -> Result<String, std::io::Error> {
+    let file_handler_result = File::open("hello.txt");
+    let mut file_handler = match file_handler_result {
+        Ok(handler) => handler,
+        Err(e) => return Err(e)
+    };
+    let mut username = String::new();
+
+    match file_handler.read_to_string(&mut username) {
+        Ok(_) => Ok(username),
+        Err(e) => Err(e),
+    }
+}
+
+fn get_error_from_fn_simple() -> Result<String, std::io::Error> {
+    let mut file_handler = File::open("hello.txt")?;
+    let mut username = String::new();
+    file_handler.read_to_string(&mut username)?;
+    Ok(username)
 }
