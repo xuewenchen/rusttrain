@@ -1,3 +1,6 @@
+use testgeneric::{Summary, Tweet, NewsArticle};
+
+
 // generic struct with one parameters
 struct Point<T> {
     x: T,
@@ -36,8 +39,29 @@ fn main() {
 
     // let result = largest_char(&char_list);
     // println!("The largest char is {}", result);
+    let tweet = Tweet {
+        username: String::from("horse_ebooks"),
+        content: String::from(
+            "of course, as you probably already know, people",
+        ),
+        reply: false,
+        retweet: false,
+    };
+
+    println!("1 new tweet: {}", tweet.summarize());
 
 
+    let article = NewsArticle {
+        headline: String::from("Penguins win the Stanley Cup Championship!"),
+        location: String::from("Pittsburgh, PA, USA"),
+        author: String::from("Iceburgh"),
+        content: String::from(
+            "The Pittsburgh Penguins once again are the best \
+             hockey team in the NHL.",
+        ),
+    };
+
+    println!("New article available! {}", article.summarize());
 }
 
 fn test_reference_change() {
@@ -77,7 +101,7 @@ fn largest_char(list: &[char]) -> &char {
 }
 
 // generic function
-fn get_largest_item<T>(list: &Vec<T>) -> &T {
+fn get_largest_item<T: PartialOrd>(list: &Vec<T>) -> &T {
     let mut largest = &list[0];
     for ele in list {
         if ele > largest {
