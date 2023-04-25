@@ -72,3 +72,20 @@ fn returns_summarizable() -> impl Summary {
         retweet: false,
     }
 }
+
+fn test_dangling_reference() {
+    // let r;
+    // {
+    //     let x = 10;
+    //     r = &x;
+    // }
+    // println!("{r}");
+}
+
+pub fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+    if x.len() > y.len() {
+        return x;
+    } else {
+        return y;
+    }   
+}

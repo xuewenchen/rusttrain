@@ -1,4 +1,4 @@
-use testgeneric::{Summary, Tweet, NewsArticle};
+use testgeneric::{Summary, Tweet, NewsArticle, longest};
 
 
 // generic struct with one parameters
@@ -26,6 +26,16 @@ struct Point2<T, U> {
     x: T,
     y: U,
 }
+
+#[derive(Debug)]
+struct Dangling<'a> {
+    name: &'a str,
+}
+
+// #[derive(Debug)]
+// struct Dangling2{
+//     name: &str,
+// }
 
 
 fn main() {
@@ -62,6 +72,16 @@ fn main() {
     };
 
     println!("New article available! {}", article.summarize());
+
+    test_longest_with_ok();
+    test_longest_with_fail();
+
+    let s = String::from("hello world");
+    let p = Dangling {name: &s};
+    println!("{:?}", p);
+
+    let a: &'static str = "hello world";
+    println!("{a}");
 }
 
 fn test_reference_change() {
@@ -111,4 +131,24 @@ fn get_largest_item<T: PartialOrd>(list: &Vec<T>) -> &T {
         }
     }
     largest
+}
+
+fn test_longest_with_ok() {
+    let string1 = String::from("long string is long");
+
+    {
+        let string2 = String::from("xyz");
+        let result = longest(string1.as_str(), string2.as_str());
+        println!("The longest string is {}", result);
+    }
+}
+
+fn test_longest_with_fail() {
+    // let string1 = String::from("long string is long");
+    // let result;
+    // {
+    //     let string2 = String::from("xyz");
+    //     result = longest(string1.as_str(), string2.as_str());
+    // }
+    // println!("The longest string is {}", result);
 }
