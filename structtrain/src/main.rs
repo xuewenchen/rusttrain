@@ -21,6 +21,9 @@ impl Rectangle {
     } 
 }
 
+mod person;
+mod human;
+
 fn main() {
     let p1 = Person {
         name: String::from("hello"),
