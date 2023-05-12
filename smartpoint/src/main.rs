@@ -85,3 +85,23 @@ fn test_drop1() {
     drop(c);
     println!("CustomSmartPointer dropped before the end of main.");
 }
+
+fn test_re11() {
+    let p = Person{age: 10, name: String::from("111")};
+    test_re22(&p);
+    println!("{:?}", p);
+}
+
+fn test_re22(p: &Person) {
+    println!("{:?}", p);
+}
+
+fn test_re33() {
+    let p = 10;
+    test_re44(p);
+    println!("{}", p);
+}
+
+fn test_re44(p: i32) {
+    println!("{}", p);
+}
