@@ -51,7 +51,10 @@ fn main() {
 
     // test_defer();
     // test_defer2();
-    test_drop1();
+    // test_drop1();
+
+    let x = 5;
+    let y = &mut x;
 }
 
 fn get_box(a: Box<Person>) {
@@ -103,5 +106,14 @@ fn test_re33() {
 }
 
 fn test_re44(p: i32) {
+    println!("{}", p);
+}
+
+fn test_re55() {
+    let p = Box::new(12);
+    test_re66(*p);
+}
+
+fn test_re66(p: i32) {
     println!("{}", p);
 }
